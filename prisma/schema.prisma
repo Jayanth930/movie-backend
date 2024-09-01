@@ -1,0 +1,137 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Genres {
+  ACTION
+  HORROR
+  ROMANCE
+  CRIME
+  ANIMATED
+  COMEDY
+  FANTASY
+  SCIENCE_FICTION
+  ADVENTURE
+  MYSTERY
+  DISASTER
+  DRAMA
+  THRILLER
+  WESTERN
+  DOCUMENTARY
+}
+
+enum Awards {
+  Best_Actor
+  Best_Actress
+  Best_Screenplay
+  Best_Adapted_Screenplay
+  Best_Original_Screenplay
+  Best_Animated_Feature_Film
+  Best_Cinematography
+  Best_Costume_Design
+  Best_Director
+  Best_Film_Editing
+  Best_Foreign_Language_Film
+}
+
+enum Occupation {
+  ARTIST
+  PRODUCER
+  ACTOR
+  ACTRESS
+  DIRECTOR
+  BUSINESS_MAN
+  PHILANTROPIST
+}
+
+model Celebrity {
+  id            String       @id @default(uuid())
+  firstname     String       @db.VarChar(50)
+  lastname      String       @db.VarChar(50)
+  date_of_birth DateTime     @db.Date
+  education     String       @db.Text
+  biography     String       @db.Text
+  created_at    DateTime?    @default(now()) @db.Timestamptz(2)
+  updated_at    DateTime?    @updatedAt
+  occupation    Occupation[]
+  movies        Movie[]
+  awards        Awards[]
+  roles         Role[]
+
+  @@map("celebrities")
+}
+
+// This are the users whos uses the website (If built like IMDB) who gives reviews and ratings etc
+model User {
+  id            String    @id @default(uuid())
+  firstname     String    @db.VarChar(50)
+  lastname      String?   @db.VarChar(50)
+  email         String    @unique @db.VarChar(255)
+  date_of_birth DateTime  @db.Date
+  created_at    DateTime? @default(now()) @db.Timestamptz(2)
+  updated_at    DateTime? @updatedAt
+  Review        Review[]
+
+  @@map("users")
+}
+
+model Review {
+  id           String    @id @default(uuid())
+  title        String    @db.Text
+  review       String    @db.Text
+  upvote_count Int       @default(0)
+  movie        Movie     @relation(fields: [movieId], references: [id], onDelete: Cascade)
+  movieId      String
+  user         User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId       String
+  created_at   DateTime? @default(now()) @db.Timestamptz(2)
+  updated_at   DateTime? @updatedAt
+
+  @@unique([userId, movieId])
+  @@map("reviews")
+}
+
+model Role {
+  id          String    @id @default(uuid())
+  name        String    @db.VarChar(20)
+  description String    @db.Text
+  movie       Movie     @relation(fields: [movieId], references: [id], onDelete: Cascade)
+  movieId     String
+  celebrity   Celebrity @relation(fields: [celebrityId], references: [id])
+  celebrityId String
+  created_at  DateTime? @default(now()) @db.Timestamptz(2)
+  updated_at  DateTime? @updatedAt
+
+  // @@unique([movieId, celebrityId])  A person in a movie might plays more than 1 role.(Rarely) Ex : Dhasavataram (Kamalhasan) played more than 1 role
+  @@map("roles")
+}
+
+// Director , producer are not optional 
+model Movie {
+  id          String      @id @default(uuid())
+  title       String      @db.VarChar(300)
+  description String      @db.Text
+  genre       Genres[]
+  date        DateTime    @db.Date
+  duration    Int // stores in seconds 
+  rating      String?     @db.VarChar(3) // Here rating means like (A , A+ , A++ , R etc ...)
+  created_at  DateTime?   @default(now()) @db.Timestamptz(2)
+  updated_at  DateTime?   @updatedAt
+  reviews     Review[]
+  cast        Celebrity[]
+  awards      Awards[]
+  roles       Role[]
+
+  @@map("movies")
+}

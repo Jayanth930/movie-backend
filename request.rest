@@ -1,0 +1,77 @@
+### Add Celebraties
+POST http://localhost:3500/celebrity/
+content-type : application/json
+
+{
+    "firstname": "Allu",
+    "lastname": "Arjun",
+    "date_of_birth": "1983/04/08",
+    "education": "Allu Arjun attended St. Patrick's College, Chennai. He later pursued a Bachelor of Business Administration (BBA).",
+    "biography": "Allu Arjun is an Indian film actor known for his work in Telugu cinema. He made his debut in 2003 with the film 'Gangotri' and has since become one of the leading actors in the industry. Known for his stylish dance moves and charismatic screen presence, Arjun has won several awards for his performances. He is also actively involved in philanthropy, contributing to various social causes.",
+    "occupation": ["ACTOR", "DIRECTOR", "PHILANTROPIST"],
+    "awards": ["Best_Actor"]
+}
+
+
+### add User 
+POST http://localhost:3500/user
+content-type : application/json
+
+{
+    "firstname": "Jayanth" , 
+    "lastname" : "Kambhampati", 
+    "email" : "jayanth2@gmail.com",
+    "date_of_birth" : "2002/06/12"
+}
+
+### Add a movie 
+POST http://localhost:3500/movie
+content-type : application/json
+
+{
+    "title": "Baby",
+    "description": "A gripping drama that explores the complexities of young love, starring Samantha.",
+    "duration": 7800,
+    "date": "2023/06/16",
+    "rating": "U",
+    "genre": ["ROMANCE", "DRAMA"]
+}
+
+
+
+### Add movie reviews
+POST http://localhost:3500/review
+content-type : application/json
+
+{
+    "title" : "Time Worthy" ,
+    "review" : "The movie so good that every person should atleast watch one time and movie should be watched in any platform if not Theatre",
+    "movieId" : "2a5d0694-5942-4047-9956-bcc44506bd15" ,
+    "userId" : "1d219a90-e30d-4283-89f8-f1ed86e89856"
+}
+
+### Upvote a movie
+PUT http://localhost:3500/review/upvote?reviewId=
+
+### Get movies from fromdate and enddate between dates 
+GET http://localhost:3500/movie?fromdate=1900/05/2&enddate=2025/02/5&page=2
+
+### Get movie from cast 
+GET http://localhost:3500/movie/cast?actor=e2e3884c-1487-4301-bb9c-64d70e9bbc78&actress=be75946b-fb13-48f9-b393-b51d9eddde5a
+
+### Update a movie 
+PUT http://localhost:3500/movie?movieId=b874e9b0-8b19-4b4f-9518-6f9f5b9f0a0f
+content-type : application/json
+
+{
+    "rating" : "A++"
+}
+
+### Adding celebrities for a particular movie 
+PUT  http://localhost:3500/movie/celebrity?movieId=52fab52f-4ae4-4ec0-ac9c-8fc4f4cd3674
+Content-Type: application/json
+
+{
+    "celebrities" : ["cc46ed82-9d05-4e30-bd52-83bea70d6557"]
+}
+
