@@ -28,7 +28,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 Before viewing Live App **Link Given In last Section** follow the Instructions for Better Experience if u setup Project Locally 
-[MOVIE DATABASE](https://github.com/user-attachments/assets/807a8b19-2419-4e6e-a178-646d473c261a)
+![MOVIE DATABASE](https://github.com/user-attachments/assets/807a8b19-2419-4e6e-a178-646d473c261a)
 
 
 ### Built With
