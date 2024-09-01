@@ -37,28 +37,42 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var client_1 = require("@prisma/client");
+var celebrity_1 = require("../src/data/celebrity");
+var users_1 = require("../src/data/users");
 var movies_1 = require("../src/data/movies");
 var prisma = new client_1.PrismaClient();
 // Here we are adding some dummy data from celebraties 
 function seed() {
     return __awaiter(this, void 0, void 0, function () {
-        var movieCount, err_1;
+        var celebrityCount, userCount, movieCount, err_1;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
-                    _a.trys.push([0, 2, , 3]);
+                    _a.trys.push([0, 4, , 5]);
+                    return [4 /*yield*/, prisma.celebrity.createMany({
+                            data: celebrity_1.default
+                        })];
+                case 1:
+                    celebrityCount = _a.sent();
+                    console.log("Added celebraties");
+                    return [4 /*yield*/, prisma.user.createMany({
+                            data: users_1.default
+                        })];
+                case 2:
+                    userCount = _a.sent();
+                    console.log("userDetails Added");
                     return [4 /*yield*/, prisma.movie.createMany({
                             data: movies_1.default
                         })];
-                case 1:
+                case 3:
                     movieCount = _a.sent();
                     console.log("movie Details added");
-                    return [3 /*break*/, 3];
-                case 2:
+                    return [3 /*break*/, 5];
+                case 4:
                     err_1 = _a.sent();
                     process.exit(err_1.message);
-                    return [3 /*break*/, 3];
-                case 3: return [2 /*return*/];
+                    return [3 /*break*/, 5];
+                case 5: return [2 /*return*/];
             }
         });
     });

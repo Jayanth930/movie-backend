@@ -8,7 +8,7 @@
     "migrate:create": "prisma migrate dev --create-only",
     "migrate:dev": "prisma migrate dev",
     "deploy": "prisma migrate deploy",
-    "seed": "node prisma/seed.js",
+    "seed": "tsc prisma/seed.ts && node prisma/seed.js",
     "devstart": "nodemon src/app.ts",
     "start": "tsc --build && node dist/app.js"
   },
