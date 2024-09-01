@@ -17,6 +17,10 @@ app.use(cors({
     allowedHeaders: "Origin, X-Requested-With, Content-Type, Accept, Authorization"
 }))
 
+app.get('/',(req,res)=>{
+    res.send("<h1>Hell World</h1>")
+})
+
 app.use('/celebrity',celebrityRouter)
 app.use('/movie',movieRouter)
 app.use('/user',userRouter)
