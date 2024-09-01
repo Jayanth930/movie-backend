@@ -92,4 +92,4 @@ Your Name - Jayanth kambhampati - `kambhampatijayanth24@gmail.com`
 
 Project Repo Link Link: [(https://github.com/Jayanth930/movie-backend.git)](https://github.com/Jayanth930/movie-backend.git)
 
-**U can View Live App Here** -  [Movie-Backend](https://expense-tracker-w7fi.onrender.com)
+**U can View Live App Here** -  [Movie-Backend](https://movie-backend-2vsz.onrender.com)
